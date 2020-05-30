@@ -28,6 +28,7 @@
 	$(document).ready(function() {
 		var searchForm = $("#idfind");
 		var idSearchBtn = $("#btn-find");
+        var loginHome = $(".btn-login");
 		
 		idSearchBtn.on("click", function() {
 			if(searchForm.find("input[name='emp_name']").val() === null) {
@@ -45,7 +46,7 @@
 			
 			var emp_name = $("input[name='emp_name']").val();
 			var emp_phone = $("input[name='emp_phone']").val();
-			var emp_email = $("input[name='emp_emanil']").val();
+			var emp_email = $("input[name='emp_email']").val();
 			
 			idSearchService.idSearch({
 				emp_name : emp_name,
@@ -55,11 +56,14 @@
 				if(result == 'fail') {
 					alert("회원 정보가 없습니다.");
 				} else {
-					alret("회원님의 아이디는 " + result + "입니다.");
+					alert("회원님의 아이디는 " + result + "입니다.");
 				}
 			});
 		});
 		
+		loginHome.on("click", function(){
+        	location.href = "/login";
+        })
 	});
 	
 	

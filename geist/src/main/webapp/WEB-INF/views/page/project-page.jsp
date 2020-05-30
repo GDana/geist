@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Geist</title>
 <!-- main Css-->
-<link href="/resources/css/document.css" rel="stylesheet" />
-<link href="/resources/css/main.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/css/document.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" />
 <!-- Bootstrap -->
 <script
 	src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
@@ -78,13 +78,15 @@
 									<div class="row">
 									<%
 										String empPosition = (String)session.getAttribute("empPosition");
+										System.out.println("empPosition === " + empPosition);
                                         if(empPosition.equals("부장")) { %>
 											<div class="col-sm-12">
 												<button type="button" class="btn float-right btn-sm dt-button" id="proWrite" onclick="showPopupWrite();">작성</button>
 												<button type="button" class="btn float-right btn-sm dt-button" id="proUpdate">수정</button>
 												<button type="button" class="btn float-right btn-sm dt-button" id="proDelete">삭제</button>
 											</div>
-									<% } else { }%> 
+									<% } else {} %> 
+									
 										<div class="col-sm-12">
 											<table id="foo-table" class="table table-bordered dataTable"
 												role="grid" aria-describedby="foo-table_info">
@@ -94,7 +96,7 @@
 														<th class="" tabindex="0" aria-controls="foo-table"
 															rowspan="1" colspan="1"
 															aria-label="제목: activate to sort column ascending"
-															style="width: 400px;">프로젝트 번호</th>
+															style="width: 1200px;">프로젝트 번호</th>
 														<th class="" tabindex="0" aria-controls="foo-table"
 															rowspan="1" colspan="1"
 															aria-label="제목: activate to sort column ascending"
@@ -130,11 +132,11 @@
 	</div>
  
 	<!--js-->
-	<script type="text/javascript" src="/resources/js/include.js"></script>
-	<script type="text/javascript" src="/resources/js/main.js"></script>
-	<script type="text/javascript" src="/resources/js/register.js"></script>
-	<script type="text/javascript" src="/resources/js/My-register.js"></script>
-	<script type="text/javascript" src="/resources/js/projectPage.js"></script>
+	<script type="text/javascript" src="../resources/js/include.js"></script>
+	<script type="text/javascript" src="../resources/js/main.js"></script>
+	<script type="text/javascript" src="../resources/js/register.js"></script>
+	<script type="text/javascript" src="../resources/js/My-register.js"></script>
+	<script type="text/javascript" src="../resources/js/projectPage.js"></script>
 	
 	</body>
 </html>
