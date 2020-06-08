@@ -120,7 +120,6 @@
                                                                 <th class="sorting_asc" tabindex="0" aria-controls="foo-table" rowspan="1" colspan="1"
                                                                 aria-sort="ascending" aria-label="조회: activate to sort column descending"
                                                                 style="width: 100px;">조회</th>
-                                                           
                                                         </tr>
                                                     </thead>
                                                     <tbody class="table-body">
