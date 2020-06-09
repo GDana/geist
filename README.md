@@ -59,9 +59,7 @@ ORDER BY app_no DESC;
 
 
 #### 수정후
-app_request의 pk_app_request는 app_no, emp_no 이므로 hint 구문이 원하는 형태로 출력이 안될 수밖에 없다. 때문에 인라인뷰만 실행된 채로 정렬되었던 문제를 인라인뷰에서 order by 정렬을 하고 만들어진 결과를 hint구문을 이용하여 원하는 데이터를 추출하였다.
-![app_request](https://user-images.githubusercontent.com/35926413/84043501-59f22a80-a9e1-11ea-8c0b-6eb615dc3e31.png)
-
+인라인뷰만 실행된 채로 정렬되었던 문제를 인라인뷰에서 order by 정렬을 하고 만들어진 결과를 hint구문을 이용하여 원하는 데이터를 추출하였다.
 ```sql
 SELECT
     app_no, app_class, app_date, app_title, emp_name, app_status
