@@ -20,7 +20,7 @@ var approvalSearchService = (function(){
 			}
 		});
 	}
-	
+	// 관리자 로그인시 모든 결재 조회
 	function getAllList(param, callback, error){
 		var page = param.page;
 		
@@ -66,6 +66,7 @@ $(document).ready(function() {
 			if(list == null || list.length == 0){
 				return;
 			}
+			
 			for(var i = 0, len = list.length || 0; i < len; i++){
 				var status = "";
 				switch(list[i].app_status){
@@ -109,6 +110,7 @@ $(document).ready(function() {
 			if(list == null || list.length == 0){
 				return;
 			}
+			
 			for(var i = 0, len = list.length || 0; i < len; i++){
 				var status = "";
 				switch(list[i].app_status){
