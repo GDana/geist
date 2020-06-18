@@ -58,7 +58,7 @@
 - 특정 URI로 접근을 막는 Interceptor 적용
 - 인라인 뷰를 적용한 페이징 처리
 ### 기타 역할
-- 작업 태스크 및 팀문서 관리
+- [작업 태스크](https://www.notion.so/gdana/4d802a0693ab44c5ae4b96973ed2189f?v=3a8257579ca24a2391a1345d50d1da04) 및 [팀문서 관리](https://www.notion.so/gdana/warr-ab31674d4f4247ac988a93c04c3fd8fb)
 - 전반적인 프론트, 백엔드 이슈 해결
 
 
@@ -73,8 +73,6 @@
 ### 1. 로그인 세션 체크 및 Interceptor 적용
 ![1 로그인세션체크](https://user-images.githubusercontent.com/35926413/85046958-1f03aa00-b1cc-11ea-892d-bed464b03aa5.png)
 특정 URI로 들어오는 요청을 가로채서 Controller 진입 전 작업인 로그인 세션이 만료되지 않았는지 체크했습니다.
-
-<br>
 
 #### 적용기술 
 Interceptor
@@ -181,13 +179,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 </details>
 
 <br>
-<br>
 
 ### 2. REST 적용
 ![3 마이페이지](https://user-images.githubusercontent.com/35926413/85047328-9cc7b580-b1cc-11ea-8c19-c5a645fd5555.png)
 REST를 구현할 수 있는 어노테이션 `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping` 중 `@GetMapping`을 사용하여 로그인한 사원의 정보를 읽어왔습니다.
-
-<br>
 
 #### 적용기술
 `@RestController` 
@@ -224,13 +219,10 @@ public class MypageController {
 </details>
 
 <br>
-<br>
 
 ### 3. 인라인 뷰를 적용한 페이징 처리
 ![7 결재조회](https://user-images.githubusercontent.com/35926413/85047384-b537d000-b1cc-11ea-81dd-5ced6fabc9eb.png)
 특정 사원이 작성한 모든 결재 문서 목록을 가져오는 쿼리로 FROM 절에 사용한 인라인 뷰를 이용하여 내림차순 정렬하고 다시 rownum의 일련번호를 이용해 필요한 페이지의 데이터를 출력하는 쿼리를 작성하여 페이징 처리 했습니다.
-
-<br>
 
 #### 적용기술
 SQL 인라인뷰
@@ -267,7 +259,6 @@ SQL 인라인뷰
 ```
 </details>
 
-<br>
 <br>
 
 ### 4. Ajax 통신
@@ -502,6 +493,7 @@ $(document).ready(function() {
 # 문제해결 과정
 ### 1. 페이징 처리를 위한 인라인뷰
 ##### 수정전 
+`app_no`는 java쪽에서 `년월일시분초`로 결재번호가 생성되기 때문에 order by의 기준을 app_no로 지정했지만 예상했던 결과와는 달리 최신순으로 정렬되지 않은 select한 리스트에서 10개로 잘려지고 DESC 처리만된 결과가 출력되는 문제가 있었습니다.
 ```sql
 SELECT
     app_no, app_class, app_date, app_title, emp_name, app_status
@@ -519,12 +511,9 @@ FROM
 WHERE rn >  (1 - 1) * 10
 ORDER BY app_no DESC;
 ```
-`app_no`는 java쪽에서 `년월일시분초`로 결재번호가 생성되기 때문에 order by의 기준을 app_no로 지정했지만 예상했던 결과와는 달리 최신순으로 정렬되지 않은 select한 리스트에서 10개로 잘려지고 DESC 처리만된 결과가 출력되었다.
-
-<br>
 
 ##### 수정후
-인라인뷰만 실행된 채로 정렬되었던 문제를 인라인뷰에서 order by 정렬을 하고 만들어진 결과를 다시 인라인뷰로 넣어 rownum을 이용하여 원하는 데이터를 추출하였다.
+FROM 절에 사용한 인라인 뷰를 이용하여 내림차순 정렬하고 다시 rownum의 일련번호를 이용해 `app_no`가 최신순으로 정렬되지 않았던 문제를 해결했습니다.
 ```sql
 SELECT
     app_no, app_class, app_date, app_title, emp_name, app_status
@@ -547,8 +536,6 @@ FROM
 WHERE rn >  (1 - 1) * 10;
 ```
 
-<br>
-
 #### 주요 성취
 막연히 서브쿼리라고 생각하고 썼던 구문이 FROM 절에 쓰는 서브쿼리인 인라인 뷰라는 것과 인라인 뷰를 하나의 테이블 처럼 사용할 수 있다는 것을 알게됬습니다.
 
@@ -556,14 +543,13 @@ WHERE rn >  (1 - 1) * 10;
 
 ### 2. 누락기능은 작업태스크에서 관리
 ![작업현황](https://user-images.githubusercontent.com/35926413/85051668-c1269080-b1d2-11ea-90ad-8f7ea8de895e.png)
-모든 구현이 끝났다 생각하고 실행한 테스트마다 "왜 이 기능을 넣지 않았을까?" 하는 누락된 기능과 기능 오류들을 작업태스크에 작성하고 관리했습니다.
-
-<br>
+모든 구현이 끝났다 생각하고 실행한 테스트마다 "왜 이 기능을 넣지 않았을까?" 하는 누락된 기능과 기능 오류들을 작업태스크에 작성하고 관리했습니다.<br>
+[:arrow_upper_right: 작업태스트](https://www.notion.so/gdana/4d802a0693ab44c5ae4b96973ed2189f?v=3a8257579ca24a2391a1345d50d1da04)
 
 #### 주요 성취
 경우의 수에 따라 테스트를 진행할 수록 초기 구상에서 뻗어나온 기능들을 설계하지 못한 누락이 발생하면서 설계의 중요성을 알게된 경험이 되었습니다.
 
-
+<br>
 <br>
 
 # 느낀점
